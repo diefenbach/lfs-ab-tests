@@ -1,0 +1,16 @@
+{% extends "manage/manage_base.html" %}
+{% load i18n %}
+
+{% block left_slot %}
+    <h2 class="navigation-title">
+        {% trans "Reports" %}
+    </h2>
+    <div class="navigation-body">
+        <div>
+            <a href="{% url lfs_ab_tests_all_targets %}">{% trans "All Targets" %}</a>
+        </div>
+        <div>
+            <a href="{% url lfs_ab_tests_targets_by_theme %}">{% trans "Targets by Theme" %}</a>
+        </div>
+    </div>
+{% endblock %}

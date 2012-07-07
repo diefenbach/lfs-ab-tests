@@ -1,0 +1,34 @@
+{% extends "lfs_ab_tests/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h2 class="first-heading">
+        {% trans "Targets by Theme" %}
+    </h2>
+
+    <table class="lfs-manage-table">
+        <tr>
+            <th>{% trans "Source" %}</th>
+            <th>{% trans "Destination" %}</th>
+            <th>{% trans "Theme" %}</th>
+            <th>{% trans "Amount" %}</th>
+        </tr>
+        {% for target in targets %}
+            <tr class="{% cycle 'even' 'odd' %}">
+                <td>
+                    {{ target.source }}
+                </td>
+                <td>
+                    {{ target.destination }}
+                </td>
+                <td>
+                    {{ target.theme }}
+                </td>
+                <td>
+                    {{ target.amount }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+
