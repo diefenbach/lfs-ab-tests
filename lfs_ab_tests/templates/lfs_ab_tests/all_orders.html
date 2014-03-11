@@ -1,0 +1,26 @@
+{% extends "lfs_ab_tests/base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h2 class="first-heading">
+        {% trans "Orders" %}
+    </h2>
+
+    <table class="lfs-manage-table">
+        <tr>
+            <th>{% trans "Order" %}</th>
+            <th>{% trans "Theme" %}</th>
+        </tr>
+        {% for order_info in order_infos %}
+            <tr class="{% cycle 'even' 'odd' %}">
+                <td>
+                    <a href="{% url lfs_manage_order order_info.order.id %}">{{ order_info.order.number }}</a>
+                </td>
+                <td>
+                    {{ order_info.theme }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+

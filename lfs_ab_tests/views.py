@@ -1,14 +1,15 @@
 # django imports
 from django.conf import settings
+from django.contrib.auth.decorators import permission_required
 from django.db import connection
-from django.db.models import Count
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 # lfs_ab_tests imports
-from lfs_ab_tests.models import TargetInformation
+from lfs_ab_tests.models import OrderInformation
 
 
+@permission_required("core.manage_shop", login_url="/login/")
 def targets_by_theme(request, template_name="lfs_ab_tests/targets_by_theme.html"):
     """
     Returns a report with targets by theme.
@@ -34,10 +35,11 @@ def targets_by_theme(request, template_name="lfs_ab_tests/targets_by_theme.html"
             })
 
     return render_to_response(template_name, RequestContext(request, {
-        "targets" : targets,
+        "targets": targets,
     }))
 
 
+@permission_required("core.manage_shop", login_url="/login/")
 def all_targets(request, template_name="lfs_ab_tests/all_targets.html"):
     """
     Returns a report with all targets.
@@ -61,5 +63,14 @@ def all_targets(request, template_name="lfs_ab_tests/all_targets.html"):
             })
 
     return render_to_response(template_name, RequestContext(request, {
-        "targets" : targets,
+        "targets": targets,
+    }))
+
+
+@permission_required("core.manage_shop", login_url="/login/")
+def all_orders(request, template_name="lfs_ab_tests/all_orders.html"):
+    """
+    """
+    return render_to_response(template_name, RequestContext(request, {
+        "order_infos": OrderInformation.objects.all(),
     }))
