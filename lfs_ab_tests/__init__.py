@@ -53,10 +53,14 @@ class Loader(BaseLoader):
             theme, frequency = theme.split(":")
             try:
                 frequency = int(frequency)
-            except ValueError, TypeError:
+            except (ValueError, TypeError):
                 frequency = 1
 
-            ti, created = ThemeInformation.objects.get_or_create(theme=theme)
+            try:
+                ti, created = ThemeInformation.objects.get_or_create(theme=theme)
+            except ThemeInformation.MultipleObjectsReturned:
+                created = False
+                ti = ThemeInformation.objects.filter(theme=theme)[0]
 
             if created:
                 return theme
