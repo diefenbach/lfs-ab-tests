@@ -72,5 +72,5 @@ def all_orders(request, template_name="lfs_ab_tests/all_orders.html"):
     """
     """
     return render_to_response(template_name, RequestContext(request, {
-        "order_infos": OrderInformation.objects.all(),
+        "order_infos": OrderInformation.objects.all().order_by("-order__number"),
     }))
